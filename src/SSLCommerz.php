@@ -29,6 +29,10 @@ class SSLCommerz extends SSLCommerzParams
         $this->__initialize_defaults();
     }
 
+    /**
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Exception
+     */
     public function make_payment($initiate_only = false)
     {
         try 
@@ -48,7 +52,7 @@ class SSLCommerz extends SSLCommerzParams
 
                 if($output->status == 'FAILED')
                 {
-                    return $output->failedreason;
+                    throw new \Exception($output->failedreason);
                 }
                 else 
                 {
